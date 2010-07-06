@@ -23,7 +23,7 @@ class Router
 	 */
 	protected function getRouteForUrl($url)
 	{
-		$route = array();
+		$route = NULL;
 
 		for($i = sizeof($this->routes)-1; $i >= 0; $i--)
 		{
@@ -32,6 +32,11 @@ class Router
 				$route = $this->routes[$i];
 				break;
 			}
+		}
+		
+		if($route == NULL)
+		{
+			throw new Exception('Ivalid url, unable to get route.');
 		}
 		
 		return $route;

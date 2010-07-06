@@ -22,9 +22,9 @@ class Router_Test extends PHPUnit_Framework_TestCase
 		$this->routerExposed = new Router_Exposed();
 		
 		$this->routerExposed->routes = array(
-			array("pattern" => "^(.*)$", "controller" => "TestController", "function" => "TestFunction"),
-			array("pattern" => "^(.foo/*)$", "controller" => "FooController", "function" => "TestFunction"),
-			array("pattern" => "^(.foo/foo*)$", "controller" => "FooController", "function" => "FooFunction"),
+			array("pattern" => "^/?$", "controller" => "TestController", "function" => "TestFunction"),
+			array("pattern" => "^/foo/?$", "controller" => "FooController", "function" => "TestFunction"),
+			array("pattern" => "^/foo/foo/?$", "controller" => "FooController", "function" => "FooFunction"),
 		);
 	}
 	
@@ -44,6 +44,28 @@ class Router_Test extends PHPUnit_Framework_TestCase
         $url = '/foo/foo';
         $testCase = $this->routerExposed->getRouteForUrl($url);
         $this->assertEquals('FooFunction', $testCase['function']);
+        
+        $url = '';
+        $testCase = $this->routerExposed->getRouteForUrl($url);
+        $this->assertEquals('TestController', $testCase['controller']);
+        
+        $url = '/foo/';
+        $testCase = $this->routerExposed->getRouteForUrl($url);
+        $this->assertEquals('FooController', $testCase['controller']);
+        
+        $url = '/foo/foo/';
+        $testCase = $this->routerExposed->getRouteForUrl($url);
+        $this->assertEquals('FooFunction', $testCase['function']);
+    }
+    
+    /**
+     * Test the exceptions for wrong url's
+     * @expectedException Exception
+     */
+    public function testGetRouteForUrlException()
+    {
+    	$url = '/wrong';
+        $testCase = $this->routerExposed->getRouteForUrl($url);
     }
 }
 ?>
