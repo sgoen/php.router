@@ -48,9 +48,10 @@ class Router
 	/**
 	 * Launches off the router and sets up intial values. These can be overidden in the test classes.
 	 */
-	public static function dispatch()
+	public static function dispatch($url)
 	{
 		$this->routes = Routes::$routes;
+		$route = $this->getRouteFromUrl($url);
 	}
 }
 ?>
