@@ -2,6 +2,9 @@
 require_once('Routes.php');
 /**
  * This class is responsible for routing url's to the apropriate controllers and functions.
+ * It handles url's like "foo/foo/foo". In a url like "http://mydomain.com/foo/foo?foo=foo"
+ * the address "http://mydomain.com" and the GET variables "?foo=foo" should be filtered
+ * before passing them to the router.
  * 
  * @author j.smit <j.smit@sgoen.nl>
  */
