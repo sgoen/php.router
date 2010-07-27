@@ -30,7 +30,7 @@ class Router
 
 		for($i = sizeof($this->routes)-1; $i >= 0; $i--)
 		{
-			if(ereg($this->routes[$i]['pattern'], $url))
+			if(preg_match($this->routes[$i]['pattern'], $url))
 			{
 				$route = $this->routes[$i];
 				break;

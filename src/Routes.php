@@ -10,7 +10,7 @@ class Routes
 	 * @var array() $routes, holds a multidimensional array of routes.
 	 */
 	public static $routes = array(
-		array("pattern" => "^(.*)$", "controller" => "TestController", "function" => "TestFunction"),
+		array("pattern" => "/^\/?/", "controller" => "TestController", "function" => "TestFunction"),
 	);
 }
 ?>

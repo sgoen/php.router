@@ -22,9 +22,9 @@ class Router_Test extends PHPUnit_Framework_TestCase
 		$this->routerExposed = new Router_Exposed();
 		
 		$this->routerExposed->routes = array(
-			array("pattern" => "^/?$", "controller" => "TestController", "function" => "TestFunction"),
-			array("pattern" => "^/foo/?$", "controller" => "FooController", "function" => "TestFunction"),
-			array("pattern" => "^/foo/foo/?$", "controller" => "FooController", "function" => "FooFunction"),
+			array("pattern" => "/^\/?$/", "controller" => "TestController", "function" => "TestFunction"),
+			array("pattern" => "/^\/foo\/?$/", "controller" => "FooController", "function" => "TestFunction"),
+			array("pattern" => "/^\/foo\/foo\/?$/", "controller" => "FooController", "function" => "FooFunction"),
 		);
 	}
 	
