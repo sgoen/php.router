@@ -22,9 +22,21 @@ class Router_Test extends PHPUnit_Framework_TestCase
 		$this->routerExposed = new Router_Exposed();
 		
 		$this->routerExposed->routes = array(
-			array("pattern" => "/^\/?$/", "controller" => "TestController", "function" => "TestFunction"),
-			array("pattern" => "/^\/foo\/?$/", "controller" => "FooController", "function" => "TestFunction"),
-			array("pattern" => "/^\/foo\/foo\/?$/", "controller" => "FooController", "function" => "FooFunction"),
+			array(
+				"pattern" => "/^\/?$/", 
+				"controller" => "TestControllerCase1", 
+				"function" => "TestFunctionCase1"
+			),
+			array(
+				"pattern" => "/^\/foo\/?$/", 
+				"controller" => "TestControllerCase2", 
+				"function" => "TestFunctionCase2"
+			),
+			array(
+				"pattern" => "/^\/foo\/foo\/?$/", 
+				"controller" => "TestControllerCase3", 
+				"function" => "TestFunctionCase4"
+			),
 		);
 	}
 	
@@ -35,27 +47,27 @@ class Router_Test extends PHPUnit_Framework_TestCase
     {	
         $url = '/';
         $testCase = $this->routerExposed->getRouteForUrl($url);
-        $this->assertEquals('TestController', $testCase['controller']);
+        $this->assertEquals('TestControllerCase1', $testCase['controller']);
         
         $url = '/foo';
         $testCase = $this->routerExposed->getRouteForUrl($url);
-        $this->assertEquals('FooController', $testCase['controller']);
+        $this->assertEquals('TestControllerCase2', $testCase['controller']);
         
         $url = '/foo/foo';
         $testCase = $this->routerExposed->getRouteForUrl($url);
-        $this->assertEquals('FooFunction', $testCase['function']);
+        $this->assertEquals('TestControllerCase3', $testCase['controller']);
         
         $url = '';
         $testCase = $this->routerExposed->getRouteForUrl($url);
-        $this->assertEquals('TestController', $testCase['controller']);
+        $this->assertEquals('TestControllerCase1', $testCase['controller']);
         
         $url = '/foo/';
         $testCase = $this->routerExposed->getRouteForUrl($url);
-        $this->assertEquals('FooController', $testCase['controller']);
+        $this->assertEquals('TestControllerCase2', $testCase['controller']);
         
         $url = '/foo/foo/';
         $testCase = $this->routerExposed->getRouteForUrl($url);
-        $this->assertEquals('FooFunction', $testCase['function']);
+        $this->assertEquals('TestControllerCase3', $testCase['controller']);
     }
     
     /**
