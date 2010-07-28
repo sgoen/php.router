@@ -37,6 +37,16 @@ class Router_Test extends PHPUnit_Framework_TestCase
 				"controller" => "TestControllerCase3", 
 				"function" => "TestFunctionCase4"
 			),
+			array(
+				"pattern" => "/^\/:class\/?$/", 
+				"controller" => ":class", 
+				"function" => "index"
+			),
+			array(
+				"pattern" => "/^\/:class\/:function\/?$/", 
+				"controller" => ":class", 
+				"function" => ":function"
+			),
 		);
 	}
 	
