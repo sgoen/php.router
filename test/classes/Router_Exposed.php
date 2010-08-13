@@ -22,5 +22,14 @@ class Router_Exposed extends Router
 	{
 		return parent::getRouteForUrl($url);
 	}
+	
+	/**
+	 * Surrogates protected function Router->routeIsDynamic()
+	 * @see Router#routeIsDynamic($route)
+	 */
+	public function routeIsDynamic($route)
+	{
+		return parent::routeIsDynamic($route);
+	}
 }
 ?>
