@@ -15,8 +15,8 @@ class Router_Exposed extends Router
 	public $routes;
 	
 	/**
-	 * Surrogates protected function Router->getRoute()
-	 * @see Router#getRoute($url)
+	 * Surrogates protected function Router->getRouteForUrl()
+	 * @see Router#getRouteForUrl($url)
 	 */
 	public function getRouteForUrl($url)
 	{
