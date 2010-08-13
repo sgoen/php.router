@@ -28,24 +28,31 @@ class Router_Test extends PHPUnit_Framework_TestCase
 				"function" => "TestFunctionCase1"
 			),
 			array(
+				"pattern" => "/^\/:class\/?$/", 
+				"controller" => ":class", 
+				"function" => "index",
+				"dynamic" => array(
+					":class" => "[a-zA-Z0-9][a-zA-Z0-9]*",
+				),
+			),
+			array(
+				"pattern" => "/^\/:class\/:function\/?$/", 
+				"controller" => ":class", 
+				"function" => ":function",
+				"dynamic" => array(
+					":class" => "[a-zA-Z0-9][a-zA-Z0-9]*",
+					":function" => "[a-zA-Z0-9][a-zA-Z0-9]*",
+				),
+			),
+			array(
 				"pattern" => "/^\/foo\/?$/", 
 				"controller" => "TestControllerCase2", 
-				"function" => "TestFunctionCase2"
+				"function" => "TestFunctionCase2",
 			),
 			array(
 				"pattern" => "/^\/foo\/foo\/?$/", 
 				"controller" => "TestControllerCase3", 
 				"function" => "TestFunctionCase4"
-			),
-			array(
-				"pattern" => "/^\/:class\/?$/", 
-				"controller" => ":class", 
-				"function" => "index"
-			),
-			array(
-				"pattern" => "/^\/:class\/:function\/?$/", 
-				"controller" => ":class", 
-				"function" => ":function"
 			),
 		);
 	}
@@ -78,16 +85,32 @@ class Router_Test extends PHPUnit_Framework_TestCase
         $url = '/foo/foo/';
         $testCase = $this->routerExposed->getRouteForUrl($url);
         $this->assertEquals('TestControllerCase3', $testCase['controller']);
+	
+		$url = '/thisisdynamic';
+        $testCase = $this->routerExposed->getRouteForUrl($url);
+		$this->assertEquals(':class', $testCase['controller']);
     }
     
     /**
      * Test the exceptions for wrong url's
-     * @expectedException Exception
+     * #expectedException Exception
      */
-    public function testGetRouteForUrlException()
+    /*public function testGetRouteForUrlException()
     {
     	$url = '/wrong';
         $testCase = $this->routerExposed->getRouteForUrl($url);
-    }
+    }*/
+
+	public function testIsRouteDynamic()
+	{
+		$route = $this->routerExposed->routes[0];
+        $testCase = $this->routerExposed->routeIsDynamic($route);
+        $this->assertEquals(false, $testCase);
+	
+		$route = $this->routerExposed->routes[1];
+        $testCase = $this->routerExposed->routeIsDynamic($route);
+        $this->assertEquals(true, $testCase);
+
+	}
 }
 ?>

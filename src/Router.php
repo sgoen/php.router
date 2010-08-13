@@ -30,7 +30,16 @@ class Router
 
 		for($i = sizeof($this->routes)-1; $i >= 0; $i--)
 		{
-			if(preg_match($this->routes[$i]['pattern'], $url))
+			// use a copy of the current route because the original may not change.
+			$currentRoute = $this->routes[$i];
+			if($this->routeIsDynamic($currentRoute))
+			{
+				foreach($currentRoute['dynamic'] as $key => $value)
+				{
+					$currentRoute['pattern'] = str_replace($key, $value, $currentRoute['pattern']);
+				}
+			}
+			if(preg_match($currentRoute['pattern'], $url))
 			{
 				$route = $this->routes[$i];
 				break;
@@ -52,6 +61,11 @@ class Router
 	{
 		$this->routes = Routes::$routes;
 		$route = $this->getRouteFromUrl($url);
+	}
+
+	protected function routeIsDynamic($route)
+	{
+		return isset($route['dynamic']);
 	}
 }
 ?>
