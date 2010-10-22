@@ -1,5 +1,4 @@
 <?php
-require_once dirname(__FILE__).'/../../libraries/PHPUnit-3.4.9/PHPUnit/Framework.php';
 require_once dirname(__FILE__).'/classes/Router_Exposed.php';
 
 /**
