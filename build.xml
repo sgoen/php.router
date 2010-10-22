@@ -3,7 +3,7 @@
 	This file is used by Phing to automate (unit)testing.
 	For more information about phing visit: http://phing.info/trac/
 -->
-<project name="Project" basedir="." default="test">
+<project name="Orm" basedir="." default="test">
 
 	<property name="src.dir" value="${project.basedir}/src" />
 	<property name="test.dir" value="${project.basedir}/test" />
@@ -19,6 +19,7 @@
 	</target>
 
 	<target name="test">
+		<phingcall target="init" />
 		<phpunit printsummary="true">
 			<formatter todir="${log.dir}" type="xml" />
 			<batchtest>
