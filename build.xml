@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is used by Phing to automate (unit)testing.
+	For more information about phing visit: http://phing.info/trac/
+-->
+<project name="Project" basedir="." default="test">
+
+	<property name="src.dir" value="${project.basedir}/src" />
+	<property name="test.dir" value="${project.basedir}/test" />
+	<property name="log.dir" value="${project.basedir}/log" />
+	<tstamp/>
+
+	<target name="init">
+		<mkdir dir="${project.basedir}/log" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${log.dir}" quiet="true" />
+	</target>
+
+	<target name="test">
+		<phpunit printsummary="true">
+			<formatter todir="${log.dir}" type="xml" />
+			<batchtest>
+				<fileset dir="${test.dir}">
+					<include name="**/*Test.php" />
+				</fileset>
+			</batchtest>
+		</phpunit>
+	</target>
+
+</project>
