@@ -1,5 +1,4 @@
 <?php
-require_once('Routes.php');
 /**
  * This class is responsible for routing url's to the apropriate controllers and functions.
  * It handles url's like "foo/foo/foo". In a url like "http://mydomain.com/foo/foo?foo=foo"
@@ -59,13 +58,17 @@ class Router
 	 */
 	public function dispatch($url)
 	{
-		$this->routes = Routes::$routes;
-		return $this->getRouteFromUrl($url);
+		return $this->getRouteForUrl($url);
 	}
 
 	protected function routeIsDynamic($route)
 	{
 		return isset($route['dynamic']);
+	}
+
+	public function setRoutes($routes)
+	{
+		$this->routes = $routes;
 	}
 }
 ?>
