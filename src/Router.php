@@ -1,4 +1,5 @@
 <?php
+require_once dirname(__FILE__) . '/Request.php';
 /**
  * This class is responsible for routing url's to the apropriate controllers and functions.
  * It handles url's like "foo/foo/foo". In a url like "http://mydomain.com/foo/foo?foo=foo"
@@ -49,8 +50,12 @@ class Router
 		{
 			throw new Exception('Ivalid url, unable to get route.');
 		}
-		
-		return $route;
+
+		$request = new Request();
+		$request->class  = $route['controller'];
+		$request->method = $route['function'];
+
+		return $request;
 	}
 	
 	/**

@@ -62,31 +62,31 @@ class Router_Test extends PHPUnit_Framework_TestCase
 	{
 		$url = '/';
 		$testCase = $this->router->dispatch($url);
-		$this->assertEquals('TestControllerCase1', $testCase['controller']);
+		$this->assertEquals('TestControllerCase1', $testCase->class);
 
 		$url = '/foo';
 		$testCase = $this->router->dispatch($url);
-		$this->assertEquals('TestControllerCase2', $testCase['controller']);
+		$this->assertEquals('TestControllerCase2', $testCase->class);
 
 		$url = '/foo/foo';
 		$testCase = $this->router->dispatch($url);
-		$this->assertEquals('TestControllerCase3', $testCase['controller']);
+		$this->assertEquals('TestControllerCase3', $testCase->class);
 
 		$url = '';
 		$testCase = $this->router->dispatch($url);
-		$this->assertEquals('TestControllerCase1', $testCase['controller']);
+		$this->assertEquals('TestControllerCase1', $testCase->class);
 
 		$url = '/foo/';
 		$testCase = $this->router->dispatch($url);
-		$this->assertEquals('TestControllerCase2', $testCase['controller']);
+		$this->assertEquals('TestControllerCase2', $testCase->class);
 
 		$url = '/foo/foo/';
 		$testCase = $this->router->dispatch($url);
-		$this->assertEquals('TestControllerCase3', $testCase['controller']);
+		$this->assertEquals('TestControllerCase3', $testCase->class);
 
 		$url = '/thisisdynamic';
 		$testCase = $this->router->dispatch($url);
-		$this->assertEquals(':class', $testCase['controller']);
+		$this->assertEquals(':class', $testCase->class);
 	}
 }
 ?>
